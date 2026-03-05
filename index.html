@@ -8,10 +8,10 @@
   <style>
     /* =========================================================
        FocusSense Project Website
-       My goal: make it feel like a real product launch page
+       Goal: make it feel like a real product launch page
        with motion, glow, and a clean tech vibe.
        ========================================================= */
-
+ 
     :root{
       /* New WOW palette (no purple/pink heavy) */
       --aqua:#00f5ff;
@@ -33,6 +33,22 @@
       --shadow: 0 22px 70px rgba(0,0,0,.55);
     }
 
+    /* Scroll down and up */
+    .scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0%;
+    z-index:9999;
+    
+    background:linear-gradient(90deg,#00f5ff,#b6ff3b,#ffb020);
+    
+    box-shadow:
+    0 0 10px #00f5ff,
+    0 0 20px #b6ff3b,
+    0 0 30px #ffb020;
+    }
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
@@ -65,6 +81,22 @@
     @keyframes aurora{
       0%{ transform: translate(-2%, -2%) scale(1.02) rotate(0deg); }
       100%{ transform: translate(2%, 2%) scale(1.08) rotate(6deg); }
+    }
+
+    @keyframes edgeFlow{
+      0%{ background-position: 0% 50%; }
+      50%{ background-position: 100% 50%; }
+      100%{ background-position: 0% 50%; }
+    }
+    
+    /* Light sweep animation behind the hero title */
+    @keyframes lightSweep{
+      0%{
+        transform:translateX(-40%);
+      }
+      100%{
+        transform:translateX(40%);
+      }
     }
 
     /* Premium grain texture */
@@ -193,6 +225,27 @@
       text-align:center;
       position:relative;
     }
+
+    .hero::before{
+    content:"";
+    position:absolute;
+    top:-40%;
+    left:-60%;
+    width:220%;
+    height:200%;
+    
+    background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.15),
+    transparent
+    );
+    
+    filter:blur(60px);
+    animation: lightSweep 8s linear infinite;
+    pointer-events:none;
+    }
+    
     .hero h1{
       margin:0;
       font-size:62px;
@@ -205,6 +258,8 @@
       background-clip:text;
       color: transparent;
       animation: titleFlow 7s linear infinite;
+      
+      text-shadow:0 0 25px rgba(0,224,255,.35);
     }
     @keyframes titleFlow{
       0%{ background-position: 0% 50%; }
@@ -300,6 +355,29 @@
       overflow:hidden;
       transform: translateY(0);
       transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .card::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    
+    background:radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(0,224,255,.25),
+    transparent 40%
+    );
+    
+    opacity:0;
+    transition:opacity .2s;
+    pointer-events:none;
+    }
+    
+    .card:hover::after{
+    opacity:1;
     }
 
     /* Card shine sweep */
@@ -684,7 +762,8 @@
       <div class="section-title"><span class="grad">Key Features</span></div>
 
       <div style="color: rgba(255,255,255,.76); font-size:14px; line-height:1.6;">
-        I built FocusSense to feel “smart” and responsive. It reads the environment, decides what lighting profile fits best, and updates the LED strip and OLED display in real time.
+        FocusSense creates a smarter workspace by sensing environmental conditions and automatically adapting the lighting system. 
+        By combining real-time sensor data with embedded control, the system helps maintain a comfortable and productive environment.
       </div>
 
       <div class="features" id="features">
@@ -713,9 +792,13 @@
       <div class="section-title"><span class="grad">Project Video Demo</span></div>
 
       <div class="video-box">
-        Replace this with my YouTube embed later. Example:
-        <br/><br/>
-        <code>
+       <iframe 
+          width="100%" 
+          height="420" 
+          src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
           &lt;iframe width="100%" height="420" src="YOUR_LINK" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
         </code>
       </div>
@@ -734,7 +817,7 @@
       </div>
 
       <div class="arch-note">
-        If the image does not show, make sure <b>architecture.png</b> is in the same folder as <b>index.html</b>.
+        System architecture showing sensor inputs, CC3200 processing, and LED/OLED output modules.
       </div>
     </section>
 
@@ -763,6 +846,19 @@
        3) Animated demo numbers and bars
        4) Architecture image tilt on mouse move
        ========================================================= */
+
+    // Scrolling up and down //
+
+    window.addEventListener("scroll", () => {
+      const scroll = document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      
+      const percent = (scroll / height) * 100;
+    
+      document.querySelector(".scroll-progress").style.width = percent + "%";
+    });
 
     // Scroll reveal
     const revealEls = document.querySelectorAll(".reveal");
@@ -853,5 +949,18 @@
       });
     }
   </script>
+  <script>
+  document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("mousemove",e=>{
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  card.style.setProperty("--x", x+"px");
+  card.style.setProperty("--y", y+"px");
+  });
+  });
+  </script>
+  
+  <div class="scroll-progress"></div>
 </body>
 </html>
