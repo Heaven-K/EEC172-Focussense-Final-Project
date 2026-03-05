@@ -6,6 +6,7 @@
   <title>FocusSense | Smart Workspace Environment Optimizer</title>
 
   <style>
+  /* CSS starts here design */
     :root{
       /* WOW accent (purple + neon pink) */
       --accent:#ff4fd8;
@@ -25,18 +26,62 @@
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 30% 0%, rgba(122,92,255,.20), transparent 60%),
-        radial-gradient(1000px 600px at 80% 10%, rgba(255,79,216,.18), transparent 55%),
-        radial-gradient(800px 500px at 50% 85%, rgba(38,184,255,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+      color: var(--text);
       min-height:100vh;
+    
+      /* SUPER DRAMATIC BACKGROUND */
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(255, 0, 122, .26), transparent 60%),
+        radial-gradient(1000px 700px at 85% 18%, rgba(140, 80, 255, .25), transparent 62%),
+        radial-gradient(900px 600px at 55% 92%, rgba(0, 255, 200, .18), transparent 60%),
+        linear-gradient(180deg, #050611 0%, #070a18 35%, #050611 100%);
+      overflow-x:hidden;
     }
 
+    /* animated “glow aurora” layer */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-40%;
+      z-index:-1;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,0,122,.35), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(140,80,255,.35), transparent 48%),
+        radial-gradient(circle at 55% 85%, rgba(0,255,200,.25), transparent 50%);
+      filter: blur(45px);
+      transform: translate3d(0,0,0);
+      animation: auroraMove 10s ease-in-out infinite alternate;
+      opacity:.9;
+    }
+
+    /* subtle moving grain = premium look */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.10;
+      animation: grainMove 6s steps(6) infinite;
+    }
+
+    @keyframes auroraMove{
+      0%{ transform: translate(-3%, -2%) scale(1.02) rotate(0deg); }
+      100%{ transform: translate(3%, 2%) scale(1.06) rotate(6deg); }
+    }
+    
+    @keyframes grainMove{
+      0%{ transform: translate(0,0); }
+      100%{ transform: translate(-2%, 1%); }
+    }
+
+    
     /* Top nav */
     .nav{
       position:sticky;
@@ -176,6 +221,34 @@
       pointer-events:none;
       opacity:.9;
     }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:inherit;
+      background:
+        linear-gradient(
+          120deg,
+          rgba(255,79,216,.6),
+          rgba(122,92,255,.6),
+          rgba(0,255,200,.6),
+          rgba(255,79,216,.6)
+        );
+      background-size:300% 300%;
+      animation: cardGlow 6s linear infinite;
+      z-index:-1;
+      filter:blur(12px);
+      opacity:.45;
+    }
+
+@keyframes cardGlow{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+    
     .card > *{position:relative}
 
     .overview p{
@@ -183,6 +256,19 @@
       color: rgba(255,255,255,.78);
       line-height:1.55;
       font-size:14px;
+    }
+
+    .card{
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    
+    .card:hover{
+      transform: translateY(-8px) scale(1.02);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.6),
+        0 0 40px rgba(255,79,216,.25),
+        0 0 80px rgba(122,92,255,.2);
+      border-color: rgba(255,255,255,.18);
     }
 
     /* Feature cards */
@@ -193,16 +279,14 @@
       gap:14px;
     }
     .feat{
-      background: rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
-      padding:14px;
-      transition: transform .18s ease, border-color .18s ease;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
+    
     .feat:hover{
-      transform: translateY(-3px);
-      border-color: rgba(255,79,216,.35);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
     }
+    
     .feat .icon{font-size:20px}
     .feat .title{
       margin:8px 0 6px;
