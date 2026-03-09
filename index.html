@@ -612,19 +612,18 @@
 
     /* Architecture */
     .arch{
-      margin-top:12px;
+      margin-top:10px;
       display:flex;
-      justify-content:center;
+      flex-direction:column;
+      gap:20px;
+      align-items:center;
       padding:10px 0 4px;
     }
     .arch img{
+      width:100%;
       max-width:100%;
       border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      box-shadow: 0 18px 60px rgba(0,0,0,.45);
-      transform: perspective(900px) rotateX(0deg) rotateY(0deg);
-      transition: transform .15s ease;
+      border:1px solid rgba(255,255,255,.1);
     }
     .arch-note{
       margin-top:10px;
