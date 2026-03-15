@@ -11,7 +11,26 @@
        Goal: make it feel like a real product launch page
        with motion, glow, and a clean tech vibe.
        ========================================================= */
- 
+
+    /* Pictures for Demo*/
+    .gallery{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+    margin-top:20px;
+    }
+    
+    .gallery img{
+    width:300px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.4);
+    transition:transform .2s;
+    }
+    
+    .gallery img:hover{
+    transform:scale(1.05);
+    }
     :root{
       /* New WOW palette (no purple/pink heavy) */
       --aqua:#00f5ff;
@@ -811,11 +830,11 @@
 
       <div class="arch">
 
-      <img src="slide1.png" alt="Slide1" style="margin-bottom:20px;">
-      <img src="slide2.png" alt="Slide2" style="margin-bottom:20px;">
-      <img src="slide3.png" alt="Slide3" style="margin-bottom:20px;">
-      <img src="slide4.png" alt="Slide4" style="margin-bottom:20px;">
-      <img src="slide5.png" alt="Slide5">
+      <img src=";">
+      <img src=";">
+      <img src=";">
+      <img src="">
+      <img src="
       
       </div>
         
@@ -823,6 +842,28 @@
         System architecture showing sensor inputs, CC3200 processing, and LED/OLED output modules.
       </div>
     </section>
+
+    <!-- HARDWARE PROTOTYPE -->
+<section class="card reveal" style="margin-top:18px;" id="hardware">
+
+<div class="section-title">
+<span class="grad">Hardware Prototype</span>
+</div>
+
+<div class="gallery">
+
+<img src="Pic1.jpg" alt="Prototype setup">
+<img src="Pic2.jpg" alt="OLED display interface">
+<img src="Pic3.jpg" alt="Sensor wiring">
+<img src="Pic4.jpg" alt="System testing">
+
+</div>
+
+<div class="arch-note">
+FocusSense prototype built using the CC3200 LaunchPad, BH1750 light sensor, TMP102 temperature sensor, WS2812B LED strip, and OLED display interface.
+</div>
+
+</section>
 
     <!-- COMPONENTS -->
     <section class="card components reveal" style="margin-top:18px;" id="components">
