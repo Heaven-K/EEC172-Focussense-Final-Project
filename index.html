@@ -1148,26 +1148,36 @@
   </div>
 
   <div class="hardware-gallery">
-    <div class="hardware-main">
-      <img src="Pic1.jpg" alt="FocusSense OLED interface and breadboard prototype">
-      <div class="hardware-label">OLED Interface + Breadboard Setup</div>
+
+    <div class="hardware-gallery">
+
+      <div class="hardware-main" onclick="openHardwareModal('Pic1.jpg','OLED Interface + Breadboard Setup')">
+        <img src="Pic1.jpg" alt="FocusSense OLED interface and breadboard prototype">
+        <div class="hardware-label">OLED Interface + Breadboard Setup</div>
+      </div>
+    
+      <div class="hardware-grid">
+    
+        <div class="hardware-item" onclick="openHardwareModal('Pic2.jpg','LED Strip Testing')">
+          <img src="Pic2.jpg" alt="FocusSense LED strip testing">
+          <div class="hardware-label">LED Strip Testing</div>
+        </div>
+    
+        <div class="hardware-item" onclick="openHardwareModal('Pic3.jpg','System Wiring')">
+          <img src="Pic3.jpg" alt="FocusSense wiring and control setup">
+          <div class="hardware-label">System Wiring</div>
+        </div>
+    
+        <div class="hardware-item" onclick="openHardwareModal('Pic4.jpg','Full Prototype View')">
+          <img src="Pic4.jpg" alt="FocusSense full prototype system">
+          <div class="hardware-label">Full Prototype View</div>
+        </div>
+    
+      </div>
+    
     </div>
 
-    <div class="hardware-grid">
-      <div class="hardware-item">
-        <img src="Pic2.jpg" alt="FocusSense LED strip testing">
-        <div class="hardware-label">LED Strip Testing</div>
-      </div>
-
-      <div class="hardware-item">
-        <img src="Pic3.jpg" alt="FocusSense wiring and control setup">
-        <div class="hardware-label">System Wiring</div>
-      </div>
-
-      <div class="hardware-item">
-        <img src="Pic4.jpg" alt="FocusSense full prototype system">
-        <div class="hardware-label">Full Prototype View</div>
-      </div>
+    
     </div>
   </div>
 
@@ -1215,8 +1225,21 @@
   }
 
   function closeArchModal(){
-    const modal = document.getElementById("archModal");
-    if (modal) modal.classList.remove("show");
+    document.getElementById("archModal").classList.remove("show");
+  }
+  
+  function openHardwareModal(imageSrc, captionText){
+    const modal = document.getElementById("hardwareModal");
+    const modalImg = document.getElementById("hardwareModalImg");
+    const modalCaption = document.getElementById("hardwareModalCaption");
+  
+    modalImg.src = imageSrc;
+    modalCaption.textContent = captionText;
+    modal.classList.add("show");
+  }
+  
+  function closeHardwareModal(){
+    document.getElementById("hardwareModal").classList.remove("show");
   }
 
   document.addEventListener("keydown", function(e){
@@ -1317,7 +1340,14 @@
   });
   </script>
 
-
+<div class="arch-modal" id="hardwareModal" onclick="closeHardwareModal()">
+  <span class="arch-modal-close" onclick="closeHardwareModal()">&times;</span>
+  <div class="arch-modal-content" onclick="event.stopPropagation()">
+    <img id="hardwareModalImg" src="" alt="Expanded hardware prototype image">
+    <div class="arch-modal-caption" id="hardwareModalCaption"></div>
+  </div>
+</div>
+  
   <div class="arch-modal" id="archModal" onclick="closeArchModal()">
   <span class="arch-modal-close" onclick="closeArchModal()">&times;</span>
   <div class="arch-modal-content" onclick="event.stopPropagation()">
