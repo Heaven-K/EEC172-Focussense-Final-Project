@@ -870,6 +870,25 @@
       line-height:1.5;
     }
     .video-box code{ color: rgba(255,255,255,.88); }
+    
+    .video-box iframe {
+        width: 100%;
+        height: 420px;
+        border-radius: 12px;
+    }
+
+    .video-grid{
+        display:flex;
+        gap:20px;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+    
+    .video-grid iframe{
+        width:500px;
+        height:280px;
+        border-radius:12px;
+    }
 
     /* Architecture */
     .arch{
@@ -1047,21 +1066,44 @@
       </div>
     </section>
 
+  
     <!-- VIDEO -->
     <section class="card reveal" style="margin-top:18px;" id="demo">
-      <div class="section-title"><span class="grad">Project Video Demo</span></div>
-
+    
+      <div class="section-title">
+        <span class="grad">Project Video Demo</span>
+      </div>
+    
       <div class="video-box">
-      <iframe
+    
+        <!-- Video 1 -->
+        <iframe
           width="100%"
           height="420"
-          src="https://www.youtube.com/embed/MERPnfIPB8g"
+          src="https://youtube.com/shorts/MERPnfIPB8g?si=E1jMfhK2GMpmak-V"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+    
+        <br><br>
+    
+        <!-- Video 2 -->
+        <iframe
+          width="100%"
+          height="420"
           src="https://youtube.com/shorts/dhJBhCRSLl4?feature=share"
           frameborder="0"
           allowfullscreen>
-      </iframe>
+        </iframe>
+    
       </div>
+    
     </section>
+
+
+
+
+    
 
     <!-- ARCHITECTURE -->
     <section class="card reveal" style="margin-top:18px;" id="arch">
