@@ -31,6 +31,105 @@
     .gallery img:hover{
     transform:scale(1.05);
     }
+
+    .hardware-intro{
+      color: rgba(255,255,255,.78);
+      font-size:14px;
+      line-height:1.6;
+      margin-bottom:18px;
+    }
+    
+    .hardware-gallery{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    
+    .hardware-main{
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+    
+    .hardware-main img{
+      width:100%;
+      height:420px;
+      object-fit:cover;
+      display:block;
+    }
+    
+    .hardware-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+    
+    .hardware-item{
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 10px 24px rgba(0,0,0,.30);
+    }
+    
+    .hardware-item img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      display:block;
+    }
+    
+    .hardware-label{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      color:white;
+      background:rgba(0,0,0,.45);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    
+    .hardware-main img,
+    .hardware-item img{
+      transition:transform .35s ease, filter .35s ease;
+    }
+    
+    .hardware-main:hover img,
+    .hardware-item:hover img{
+      transform:scale(1.04);
+      filter:brightness(1.05);
+    }
+    
+    .hardware-note{
+      margin-top:18px;
+      color: rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.5;
+    }
+    
+    @media (max-width: 900px){
+      .hardware-grid{
+        grid-template-columns:1fr;
+      }
+    
+      .hardware-main img{
+        height:300px;
+      }
+    
+      .hardware-item img{
+        height:240px;
+      }
+    }
+
+
+
+    
     :root{
       /* New WOW palette (no purple/pink heavy) */
       --aqua:#00f5ff;
@@ -814,6 +913,7 @@
           width="100%"
           height="420"
           src="https://www.youtube.com/embed/MERPnfIPB8g"
+          src="https://youtube.com/shorts/dhJBhCRSLl4?feature=share"
           frameborder="0"
           allowfullscreen>
       </iframe>
@@ -831,10 +931,6 @@
       <div class="arch">
 
       <img src=";">
-      <img src=";">
-      <img src=";">
-      <img src="">
-      <img src="
       
       </div>
         
@@ -844,25 +940,43 @@
     </section>
 
     <!-- HARDWARE PROTOTYPE -->
+    
 <section class="card reveal" style="margin-top:18px;" id="hardware">
+  <div class="section-title">
+    <span class="grad">Hardware Prototype</span>
+  </div>
 
-<div class="section-title">
-<span class="grad">Hardware Prototype</span>
-</div>
+  <div class="hardware-intro">
+    Below is the physical FocusSense prototype, including the CC3200 LaunchPad, OLED interface, LED strip, and breadboarded sensor connections used during testing and integration.
+  </div>
 
-<div class="gallery">
+  <div class="hardware-gallery">
+    <div class="hardware-main">
+      <img src="Pic1.jpg" alt="FocusSense OLED interface and breadboard prototype">
+      <div class="hardware-label">OLED Interface + Breadboard Setup</div>
+    </div>
 
-<img src="Pic1.jpg" alt="Prototype setup">
-<img src="Pic2.jpg" alt="OLED display interface">
-<img src="Pic3.jpg" alt="Sensor wiring">
-<img src="Pic4.jpg" alt="System testing">
+    <div class="hardware-grid">
+      <div class="hardware-item">
+        <img src="Pic2.jpg" alt="FocusSense LED strip testing">
+        <div class="hardware-label">LED Strip Testing</div>
+      </div>
 
-</div>
+      <div class="hardware-item">
+        <img src="Pic3.jpg" alt="FocusSense wiring and control setup">
+        <div class="hardware-label">System Wiring</div>
+      </div>
 
-<div class="arch-note">
-FocusSense prototype built using the CC3200 LaunchPad, BH1750 light sensor, TMP102 temperature sensor, WS2812B LED strip, and OLED display interface.
-</div>
+      <div class="hardware-item">
+        <img src="Pic4.jpg" alt="FocusSense full prototype system">
+        <div class="hardware-label">Full Prototype View</div>
+      </div>
+    </div>
+  </div>
 
+  <div class="hardware-note">
+    FocusSense prototype built using the CC3200 LaunchPad, BH1750 light sensor, TMP102 temperature sensor, WS2812B LED strip, and OLED display interface.
+  </div>
 </section>
 
     <!-- COMPONENTS -->
