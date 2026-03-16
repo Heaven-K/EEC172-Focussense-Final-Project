@@ -1193,139 +1193,118 @@
     </div>
   </div>
 
-  <script>
-    /* =========================================================
-       Small JS for WOW:
-       1) Scroll reveal
-       2) Active nav highlight
-       3) Animated demo numbers and bars
-       4) Architecture image tilt on mouse move
-       ========================================================= */
+<script>
+  /* =========================================================
+     Small JS for WOW:
+     1) Scroll reveal
+     2) Active nav highlight
+     3) Animated demo numbers and bars
+     4) Architecture modal
+     ========================================================= */
 
-    <script>
-      function openArchModal(imageSrc, captionText){
-        const modal = document.getElementById("archModal");
-        const modalImg = document.getElementById("archModalImg");
-        const modalCaption = document.getElementById("archModalCaption");
-    
-        modalImg.src = imageSrc;
-        modalCaption.textContent = captionText;
-        modal.classList.add("show");
-      }
-    
-      function closeArchModal(){
-        document.getElementById("archModal").classList.remove("show");
-      }
-    
-      document.addEventListener("keydown", function(e){
-        if(e.key === "Escape"){
-          closeArchModal();
-        }
-      });
+  function openArchModal(imageSrc, captionText){
+    const modal = document.getElementById("archModal");
+    const modalImg = document.getElementById("archModalImg");
+    const modalCaption = document.getElementById("archModalCaption");
 
+    if (!modal || !modalImg || !modalCaption) return;
 
-    // Scrolling up and down //
+    modalImg.src = imageSrc;
+    modalCaption.textContent = captionText;
+    modal.classList.add("show");
+  }
 
-    window.addEventListener("scroll", () => {
-      const scroll = document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      
-      const percent = (scroll / height) * 100;
-    
-      document.querySelector(".scroll-progress").style.width = percent + "%";
-    });
+  function closeArchModal(){
+    const modal = document.getElementById("archModal");
+    if (modal) modal.classList.remove("show");
+  }
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting) e.target.classList.add("show");
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
-
-    // Active nav link highlight based on scroll
-    const sections = [
-      { id: "overview", linkText: "Overview" },
-      { id: "featuresSection", linkText: "Features" },
-      { id: "demo", linkText: "Video Demo" },
-      { id: "arch", linkText: "Architecture" },
-      { id: "components", linkText: "Components" }
-    ];
-    const navLinks = Array.from(document.querySelectorAll("#navLinks a"));
-
-    const setActive = () => {
-      let current = "overview";
-      sections.forEach(s => {
-        const el = document.getElementById(s.id);
-        if(!el) return;
-        const top = el.getBoundingClientRect().top;
-        if(top <= 120) current = s.id;
-      });
-      navLinks.forEach(a => {
-        const href = a.getAttribute("href");
-        a.classList.toggle("active", href === "#" + current);
-      });
-    };
-    window.addEventListener("scroll", setActive, { passive:true });
-    setActive();
-
-    // Animated demo numbers
-    const luxVal = document.getElementById("luxVal");
-    const tempVal = document.getElementById("tempVal");
-    const luxBar = document.getElementById("luxBar");
-    const tempBar = document.getElementById("tempBar");
-    const modeText = document.getElementById("modeText");
-
-    const modes = [
-      "Mode: Bright Boost (Auto)",
-      "Mode: Focus Warm (Auto)",
-      "Mode: Cool Productivity (Auto)"
-    ];
-
-    let t = 0;
-    setInterval(() => {
-      t++;
-
-      // Fake but believable fluctuation
-      const lux = 40 + Math.round(25 + 18 * Math.sin(t / 3));
-      const temp = (22.4 + 2.1 * Math.sin(t / 4)).toFixed(1);
-
-      luxVal.textContent = lux + " lux";
-      tempVal.textContent = temp + " °C";
-
-      luxBar.style.width = Math.min(95, Math.max(10, lux)) + "%";
-      tempBar.style.width = Math.min(95, Math.max(10, (temp / 35) * 100)) + "%";
-
-      // Rotate modes
-      if(t % 5 === 0){
-        modeText.textContent = modes[(t/5) % modes.length | 0];
-      }
-    }, 900);
-
-    // Architecture tilt effect
-    const archImg = document.getElementById("archImg");
-    if(archImg){
-      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-
-      archImg.addEventListener("mousemove", (e) => {
-        const r = archImg.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width;
-        const y = (e.clientY - r.top) / r.height;
-
-        const rotY = clamp((x - 0.5) * 18, -10, 10);
-        const rotX = clamp((0.5 - y) * 18, -10, 10);
-
-        archImg.style.transform = "perspective(900px) rotateX(" + rotX + "deg) rotateY(" + rotY + "deg) scale(1.01)";
-      });
-
-      archImg.addEventListener("mouseleave", () => {
-        archImg.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
-      });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      closeArchModal();
     }
-  </script>
+  });
+
+  const progressBar = document.querySelector(".scroll-progress");
+
+  window.addEventListener("scroll", () => {
+    if (!progressBar) return;
+
+    const scroll = document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+
+    const percent = (scroll / height) * 100;
+      progressBar.style.width = percent + "%";
+  });
+
+  const revealEls = document.querySelectorAll(".reveal");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) e.target.classList.add("show");
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  const sections = [
+    { id: "overview", linkText: "Overview" },
+    { id: "featuresSection", linkText: "Features" },
+    { id: "demo", linkText: "Video Demo" },
+    { id: "arch", linkText: "Architecture" },
+    { id: "components", linkText: "Components" }
+  ];
+  const navLinks = Array.from(document.querySelectorAll("#navLinks a"));
+
+  const setActive = () => {
+    let current = "overview";
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if(!el) return;
+      const top = el.getBoundingClientRect().top;
+      if(top <= 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      const href = a.getAttribute("href");
+      a.classList.toggle("active", href === "#" + current);
+    });
+  };
+  window.addEventListener("scroll", setActive, { passive:true });
+  setActive();
+
+  const luxVal = document.getElementById("luxVal");
+  const tempVal = document.getElementById("tempVal");
+  const luxBar = document.getElementById("luxBar");
+  const tempBar = document.getElementById("tempBar");
+  const modeText = document.getElementById("modeText");
+
+  const modes = [
+    "Mode: Bright Boost (Auto)",
+    "Mode: Focus Warm (Auto)",
+    "Mode: Cool Productivity (Auto)"
+  ];
+
+  let t = 0;
+  setInterval(() => {
+    if (!luxVal || !tempVal || !luxBar || !tempBar || !modeText) return;
+
+    t++;
+    const lux = 40 + Math.round(25 + 18 * Math.sin(t / 3));
+    const temp = (22.4 + 2.1 * Math.sin(t / 4)).toFixed(1);
+
+    luxVal.textContent = lux + " lux";
+    tempVal.textContent = temp + " °C";
+
+    luxBar.style.width = Math.min(95, Math.max(10, lux)) + "%";
+    tempBar.style.width = Math.min(95, Math.max(10, (temp / 35) * 100)) + "%";
+
+    if(t % 5 === 0){
+      modeText.textContent = modes[(t/5) % modes.length | 0];
+    }
+  }, 900);
+</script>
+
+  
   <script>
   document.querySelectorAll(".card").forEach(card=>{
   card.addEventListener("mousemove",e=>{
